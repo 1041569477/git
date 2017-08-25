@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+<form method="post" action="ptype_delAll" id="listform">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder"> 用户详情</strong>
+        </div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li><a class="button border-main icon-plus-square-o" href="ptype_add"> 添加内容</a></li>
+                <li>
+                    <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input"
+                           style="width:250px; line-height:17px;display:inline-block"/>
+                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()"> 搜索</a>
+                </li>
+                <li style="float: right">
+                    <a href="user_list" class="button border-main icon-search"  >返回列表页</a>
+
+                </li>
+            </ul>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th>ID</th>
+                <td>{$details[0]['userid']}</td>
+            </tr>
+            <tr>
+                <th>用户名</th>
+                <td>{$details[0]['username']}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{if condition="$details[0]['email']==''"}
+                        未实名
+                    {else /}
+                        {$details[0]['email']}
+                    {/if}</td>
+            </tr>
+            <tr>
+                <th>手机号</th>
+                <td>{$details[0]['telephone']}</td>
+            </tr>
+            <tr>
+                <th>真实姓名</th>
+                <td>
+                    {if condition="$details[0]['realname']==''"}
+                        未实名
+                    {else /}
+                        {$details[0]['realname']}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <th>身份证号</th>
+                <td>
+                    {if condition="$details[0]['idcard']==''"}
+                        未实名
+                    {else /}
+                        {$details[0]['idcard']}
+                    {/if}
+                </td>
+            </tr>
+            <tr>
+                <th>账户余额</th>
+                <td>{$details[0]['money']}元</td>
+            </tr>
+            <tr>
+                <th>最近登陆时间</th>
+                <td>
+                    {if condition="$details[0]['now_time']==''"}
+                        未登录
+                    {else /}
+                        {$details[0]['now_time']|date="Y-m-d H:i:s",###}
+                    {/if}
+                </td>
+
+
+            </tr>
+        </table>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    //搜索
+    $(".icon-search").on("click", function () {
+        var search = $(".input").val();
+        $.ajax({
+            url: "ptype_search",
+            data: {search: search},
+            dataType: "json",
+            success: function (msg) {
+                $("#tbody").empty();
+                $.each(msg, function (k, v) {
+                    var str = '<tr>\
+          <td style="text-align:left; padding-left:20px;">\
+          <input type="checkbox" name="id[]" value="" />' + v.pro_t_id + '</td>\
+          <td>' + v.pro_t_name + '</td>\
+          <td>' + v.parentid + '</td>\
+         <td>' + v.intro + '</td>\
+          <td><div class="button-group"> <a class="button border-main" href="add.html">\
+          <span class="icon-edit"></span> 修改</a> \
+          <a class="button border-red" href="javascript:void(0)" onclick="return del(1,1,1)">\
+          <span class="icon-trash-o"></span> 删除</a> </div></td>\
+        </tr>';
+                    $("#tbody").append(str);
+                })
+            }
+        })
+    })
+    //
+
+
+    //单个删除
+
+
+</script>
+</body>
+</html>

@@ -38,8 +38,10 @@ class Ptype  extends \think\Controller{
                 $protype=new Protype();
                 $data=$protype->select();
 
+
                 // 获取分页显示4
                 $page = $data->render();
+
 
               
                 $this->assign("data",$data);
@@ -85,9 +87,11 @@ class Ptype  extends \think\Controller{
              $data=$protype->delAll($pro_t_id);
    
              if($data){
+
                 return $this->redirect('index/Ptype/index');
              }else{
                 return $this->redirect('index/Ptype/index');
+
              }
              
      

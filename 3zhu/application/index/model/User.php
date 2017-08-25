@@ -5,7 +5,9 @@ use think\Db;
 class User extends Model{
 	//添加
    public function add($data){
-      $info=Db::table('user')->insert($data);
+
+      $info=Db::table('admin_user')->insert($data);
+
       return $info;
    }
    	//查询用户账号密码

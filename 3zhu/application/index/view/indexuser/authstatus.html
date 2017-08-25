@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" href="css/pintuer.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/pintuer.js"></script>
+</head>
+<body>
+<form method="post" action="ptype_delAll" id="listform">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href=""
+                                                                               style="float:right; display:none;">添加字段</a>
+        </div>
+        <div class="padding border-bottom">
+            <ul class="search" style="padding-left:10px;">
+                <li><a class="button border-main icon-plus-square-o" href="ptype_add"> 添加内容</a></li>
+
+
+                <li>
+                    <input type="text" placeholder="请输入搜索关键字" name="keywords" class="input"
+                           style="width:250px; line-height:17px;display:inline-block"/>
+                    <a href="javascript:void(0)" class="button border-main icon-search" onclick="changesearch()"> 搜索</a>
+                </li>
+            </ul>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>邮箱提醒</th>
+                <th>短信提醒</th>
+                <th>站内信提醒</th>
+            </tr>
+            <tbody id="tbody">
+
+
+            {foreach $list as $v}
+            <tr>
+                <td>
+                    {$v['userid']}
+                </td>
+
+
+                <td>
+                    {$v['username']}</td>
+                <td>
+                    {if condition="$v['email']==''"}
+                    未设置邮箱
+                    {else /}
+                    <a href="javascript:void(0)" t="{$v['email']}" class="button border-main icon-search email">邮箱提醒</a>
+                    {/if}
+
+                </td>
+                <td>
+                    <a href="javascript:void(0)" t="{$v['telephone']}" class="button border-main icon-search tel_message">短信提醒</a>
+                </td>
+                <td>
+                    <a href="javascript:void(0)" t="{$v['userid']}" class="button border-main icon-search message">站内信提醒</a>
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+
+            <tr>
+                <td colspan="8">
+                    <div class="pagelist">
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    $(function(){
+        $('.email').click(function(){
+            var email = $(this).attr('t');
+            $.ajax({
+                url:'user_email',
+                type:'post',
+                data:{
+                    email:email
+                },
+                success:function(data){
+                    if(data==1){
+                        alert('邮件已发送')
+                    }else{
+                        alert('发送失败')
+                    }
+                }
+            })
+        })
+        $('.tel_message').click(function(){
+            var tel = $(this).attr('t');
+            $.ajax({
+                url:'user_tel',
+                type:'post',
+                data:{
+                    tel:tel
+                },
+                success:function(data){
+                    if(data==1){
+                        alert('短信已发送')
+                    }else{
+                        alert('发送失败')
+                    }
+                }
+            })
+        })
+        $('.message').click(function(){
+            var userid = $(this).attr('t');
+            $.ajax({
+                url:'user_message',
+                type:'post',
+                data:{
+                    userid:userid
+                },
+                success:function(data){
+                    if(data==1){
+                        alert('站内信已发送')
+                    }else{
+                        alert('发送失败')
+                    }
+                }
+            })
+        })
+    })
+
+
+</script>
+</body>
+</html>

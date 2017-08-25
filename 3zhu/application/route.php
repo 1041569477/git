@@ -26,10 +26,23 @@ return [
    "ptype_search"=>"index/Ptype/search",//产品分类搜索页面
    "ptype_del"=>"index/Ptype/del",//产品分类删除
    "ptype_delAll"=>"index/Ptype/delAll",//产品分类批量删除
+
    
    /*----------------优惠券------------------*/
    "coupon_add"=>"index/Coupon/add",    //优惠券添加
    "coupon_add_do"=>"index/Coupon/add_do",
    "coupon_list"=>"index/Coupon/lists",   //已有优惠券
    "protype_sel"=>"index/Coupon/protype_sel",  //产品查询
+
+
+
+    //用户信息
+    "user_list"=>"index/Indexuser/index", //用户信息展示
+    "user_authstatus"=>"index/Indexuser/authstatus", //未实名
+    "user_details"=>"index/Indexuser/details", //用户详情
+    "user_email"=>"index/Indexuser/email", //发邮件
+    "user_tel"=>"index/Indexuser/code", //发短信
+    "user_message"=>"index/Indexuser/message", //发站内信
+
+
 ];

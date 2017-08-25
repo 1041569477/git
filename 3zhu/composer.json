@@ -18,7 +18,16 @@
     "require": {
         "php": ">=5.4.0",
         "topthink/framework": "~5.0.0",
+<<<<<<< HEAD
         "topthink/think-captcha": "^1.0"
+=======
+<<<<<<< HEAD
+        "topthink/think-captcha": "^1.0"
+=======
+        "topthink/think-captcha": "^1.0",
+        "phpmailer/phpmailer": "^5.2"
+>>>>>>> 1bd8726f48dac069a829eefab41e19243decc407
+>>>>>>> 691e27a859459d5ee769cf19c98cf8179acf68fd
     },
     "extra": {
         "think-path": "thinkphp"
